@@ -1,11 +1,9 @@
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setItems } from '../../redux/currentSlice';
 import { setRenderConditionFalse } from '../../redux/contextSlice';
 import stateHelper from '../../logic/stateHelper';
 export default function FileContext() {
 	const dispatch = useDispatch();
-
-	const items = useSelector((state: any) => state.current.currentFolder.items);
 	const selectedFile = useSelector(
 		(state: any) => state.axiosProcess.selectedFile
 	);

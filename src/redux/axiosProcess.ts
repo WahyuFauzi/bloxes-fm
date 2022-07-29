@@ -4,7 +4,6 @@ import { createSlice } from '@reduxjs/toolkit';
 export const axiosProcessSlice = createSlice({
 	name: 'axiosProcess',
 	initialState: {
-		process: false,
 		fileUploaded: '',
 		selectedFile: {
 			id: '',
@@ -12,12 +11,6 @@ export const axiosProcessSlice = createSlice({
 		},
 	},
 	reducers: {
-		setProcessTrue: (state) => {
-			state.process = true;
-		},
-		setProcessFalse: (state) => {
-			state.process = false;
-		},
 		setFileUpload: (state, action) => {
 			state.fileUploaded = action.payload;
 		},
@@ -37,8 +30,6 @@ export const axiosProcessSlice = createSlice({
 });
 
 export const {
-	setProcessTrue,
-	setProcessFalse,
 	setFileUpload,
 	emptyingFileUpload,
 	setSelectedFile,

@@ -1,12 +1,11 @@
+import React from 'react';
 import { showFolderNameInput } from '../../redux/currentSlice';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setRenderConditionFalse } from '../../redux/contextSlice';
 import stateHelper from '../../logic/stateHelper';
-import { setItems } from '../../redux/currentSlice';
 
 export default function MainContext() {
 	const dispatch = useDispatch();
-	const items = useSelector((state: any) => state.current.currentFolder.items);
 
 	let inputElement;
 	let fileUpload;

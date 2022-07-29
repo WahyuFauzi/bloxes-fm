@@ -1,8 +1,15 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import FolderContext from './FolderContext';
 import FileContext from './FileContext';
 import MainContext from './MainContext.js';
 import { setRenderConditionFalse } from '../../redux/contextSlice';
+
+PlainContext.propTypes = {
+	top: PropTypes.number,
+	left: PropTypes.number,
+};
 
 export default function PlainContext(props) {
 	const dispatch = useDispatch();

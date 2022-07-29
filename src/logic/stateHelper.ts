@@ -1,6 +1,5 @@
 import { store } from '../redux/store';
 import axiosHelper from './axiosHelper.js';
-import axios from 'axios';
 
 import { setCurrentFolder, setPath } from '../redux/currentSlice';
 
@@ -8,7 +7,7 @@ class StateHelper {
 	constructor(store) {
 		this.store = store;
 	}
-	store: any;
+	store;
 
 	updateFolder(updatedFolder) {
 		this.store.dispatch(setCurrentFolder(updatedFolder));
@@ -23,7 +22,7 @@ class StateHelper {
 	}
 
 	onInit() {
-		let initFolderId = localStorage.getItem('init_folder_id');
+		const initFolderId = localStorage.getItem('init_folder_id');
 
 		if (initFolderId === undefined || initFolderId === null) {
 			axiosHelper.createFolder('init folder').then((response) => {
@@ -40,7 +39,7 @@ class StateHelper {
 	}
 
 	createFolder(folderName) {
-		let currentFolder = this.store.getState().current.currentFolder;
+		const currentFolder = this.store.getState().current.currentFolder;
 		axiosHelper.createFolder(folderName).then((response) => {
 			const newFolder = {
 				id: response.data.data.id,
@@ -53,8 +52,8 @@ class StateHelper {
 	}
 
 	deleteFolder(folderId) {
-		let currentFolder = this.store.getState().current.currentFolder;
-		let nestedFolders = currentFolder.nested_folders;
+		const currentFolder = this.store.getState().current.currentFolder;
+		const nestedFolders = currentFolder.nested_folders;
 		const newArr = nestedFolders.filter((object) => {
 			return object.id !== folderId;
 		});
@@ -64,7 +63,7 @@ class StateHelper {
 	}
 
 	uploadFile(newFile) {
-		let currentFolder = this.store.getState().current.currentFolder;
+		const currentFolder = this.store.getState().current.currentFolder;
 		axiosHelper.postItem(newFile).then((response) => {
 			const newItem = {
 				id: response.data.data.id,
@@ -77,20 +76,20 @@ class StateHelper {
 	}
 
 	deleteFile(fileId) {
-		let currentFolder = this.store.getState().current.currentFolder;
-		let items = currentFolder.items;
+		const currentFolder = this.store.getState().current.currentFolder;
+		const items = currentFolder.items;
 		const newArr = items.filter((object) => {
 			return object.id !== fileId;
 		});
-		axiosHelper.deleteFile(fileId).then((response) => {});
+		axiosHelper.deleteFile(fileId).then();
 		const newCurrentFolder = JSON.parse(JSON.stringify(currentFolder));
 		newCurrentFolder.items = newArr;
 		this.updateFolder(newCurrentFolder);
 	}
 
 	openFolder(folderId) {
-		let currentPath = this.store.getState().current.currentPath;
-		let parsedCurrentPath = JSON.parse(JSON.stringify(currentPath));
+		const currentPath = this.store.getState().current.currentPath;
+		const parsedCurrentPath = JSON.parse(JSON.stringify(currentPath));
 		parsedCurrentPath.push(folderId);
 		this.store.dispatch(setPath(parsedCurrentPath));
 		axiosHelper.getFolder(folderId).then((response) => {
@@ -105,8 +104,8 @@ class StateHelper {
 	}
 
 	backToParentFolder() {
-		let currentPath = this.store.getState().current.currentPath;
-		let parsedCurrentPath = JSON.parse(JSON.stringify(currentPath));
+		const currentPath = this.store.getState().current.currentPath;
+		const parsedCurrentPath = JSON.parse(JSON.stringify(currentPath));
 		if (parsedCurrentPath.length > 1) {
 			parsedCurrentPath.pop();
 		}

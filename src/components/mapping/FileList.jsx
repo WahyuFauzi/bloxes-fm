@@ -1,3 +1,4 @@
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import Document from '../icon/document.jsx';
 import { setSelectedFile } from '../../redux/axiosProcess';
@@ -34,9 +35,6 @@ function fileList(files) {
 				key={index}
 				onContextMenu={(e) => {
 					handelContext(e, i);
-				}}
-				onDoubleClick={(e) => {
-					console.log(i);
 				}}
 			>
 				<Document className="w-24 h-36 mx-auto" color="gray" />

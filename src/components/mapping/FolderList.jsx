@@ -1,3 +1,4 @@
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import Folder from '../icon/folder';
 import { setSelectedFile } from '../../redux/axiosProcess';
@@ -36,7 +37,7 @@ function folderList(folders) {
 				onContextMenu={(e) => {
 					handelContext(e, j);
 				}}
-				onDoubleClick={(e) => {
+				onDoubleClick={() => {
 					stateHelper.openFolder(j.id);
 				}}
 			>
