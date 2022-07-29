@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import Folder from '../icon/folder';
 import { setSelectedFile } from '../../redux/axiosProcess';
 import { setPosition, setRenderConditionTrue } from '../../redux/contextSlice';
+import stateHelper from '../../logic/stateHelper';
 
 function folderList(folders) {
 	const dispatch = useDispatch();
@@ -11,7 +12,7 @@ function folderList(folders) {
 		e.stopPropagation();
 		dispatch(
 			setSelectedFile({
-				id: folder._id,
+				id: folder.id,
 				type: 'folder',
 			})
 		);
@@ -34,6 +35,9 @@ function folderList(folders) {
 				key={index}
 				onContextMenu={(e) => {
 					handelContext(e, j);
+				}}
+				onDoubleClick={(e) => {
+					stateHelper.openFolder(j.id);
 				}}
 			>
 				<Folder className="w-24 h-36 mx-auto" color="gray" />

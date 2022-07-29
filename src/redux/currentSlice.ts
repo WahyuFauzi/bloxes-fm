@@ -5,40 +5,57 @@ export const currentSlice = createSlice({
 	initialState: {
 		currentPath: [],
 		currentFolder: {
-			_id: '',
+			id: '',
 			folder_name: '',
 			nested_folders: [
-				{ _id: '01', folder_name: 'cat house 1' },
-				{ _id: '02', folder_name: 'cat house 2' },
+				{ id: '01', folder_name: 'cat house 1' },
+				{ id: '02', folder_name: 'cat house 2' },
 			],
 			items: [
-				{ _id: '01', item_name: 'jotaro' },
-				{ _id: '02', item_name: 'joseph' },
-				{ _id: '03', item_name: 'jonathan' },
+				{ id: '01', item_name: 'jotaro' },
+				{ id: '02', item_name: 'joseph' },
+				{ id: '03', item_name: 'jonathan' },
 			],
 		},
+		folderInputCondition: 'hidden',
 	},
 	reducers: {
-		addPath: (state, action) => {
-			let currentPath = state.currentPath;
-			currentPath.push(action.payload);
-			state.currentPath = currentPath;
+		setPath: (state, action) => {
+			state.currentPath = action.payload;
 		},
-		backPath: (state, action) => {
-			let currentPath = state.currentPath;
-			var index = currentPath.indexOf(action.payload);
-			if (index !== -1) {
-				currentPath.splice(index, 1);
-			}
-			state.currentPath = currentPath;
+
+		setCurrentFolder: (state, action) => {
+			state.currentFolder.id = action.payload.id;
+			state.currentFolder.folder_name = action.payload.folder_name;
+			state.currentFolder.nested_folders = action.payload.nested_folders;
+			state.currentFolder.items = action.payload.items;
 		},
-		setCurrentFolder: (state, action) => {},
-		setCurrentItems: (state, action) => {},
-		setCurrentNestedFolder: (state, action) => {},
+
+		setNestedFolders: (state, action) => {
+			state.currentFolder.nested_folders = action.payload;
+		},
+
+		setItems: (state, action) => {
+			state.currentFolder.items = action.payload;
+		},
+
+		showFolderNameInput: (state) => {
+			state.folderInputCondition = 'w-screen h-screen top-0 left-0 absolute';
+		},
+
+		hideFolderNameInput: (state) => {
+			state.folderInputCondition = 'hidden';
+		},
 	},
 });
 
-export const { setCurrentItems, setCurrentNestedFolder, addPath, backPath } =
-	currentSlice.actions;
+export const {
+	setCurrentFolder,
+	setNestedFolders,
+	setItems,
+	setPath,
+	showFolderNameInput,
+	hideFolderNameInput,
+} = currentSlice.actions;
 
 export default currentSlice.reducer;

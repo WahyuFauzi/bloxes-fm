@@ -1,10 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
 import Main from './components/main/Main.jsx';
 import Layout from './components/Layout.jsx';
-import axiosHelper from './logic/axiosHelper.js';
+import stateHelper from './logic/stateHelper.js';
 
 function App() {
-	axiosHelper.createFolder();
+	stateHelper.onInit();
 	return (
 		<Layout>
 			<Routes>

@@ -9,11 +9,11 @@ import './index.css';
 //NOTE imports need to be jsx instead of jsx to perform hot reload
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-	<React.StrictMode>
-		<Provider store={store}>
-			<BrowserRouter>
-				<App />
-			</BrowserRouter>
-		</Provider>
-	</React.StrictMode>
+	//<React.StrictMode>
+	<Provider store={store}>
+		<BrowserRouter>
+			<App />
+		</BrowserRouter>
+	</Provider>
+	//</React.StrictMode>
 );

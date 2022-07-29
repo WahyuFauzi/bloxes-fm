@@ -11,7 +11,7 @@ function fileList(files) {
 		e.stopPropagation();
 		dispatch(
 			setSelectedFile({
-				id: item._id,
+				id: item.id,
 				type: 'file',
 			})
 		);
@@ -34,6 +34,9 @@ function fileList(files) {
 				key={index}
 				onContextMenu={(e) => {
 					handelContext(e, i);
+				}}
+				onDoubleClick={(e) => {
+					console.log(i);
 				}}
 			>
 				<Document className="w-24 h-36 mx-auto" color="gray" />

@@ -10,8 +10,6 @@ export const contextSlice = createSlice({
 		setPosition: (state, action) => {
 			state.position.x = action.payload.x;
 			state.position.y = action.payload.y;
-			console.log(state.position.x);
-			console.log(state.position.y);
 		},
 		setRenderConditionTrue: (state) => {
 			state.renderCondition = true;

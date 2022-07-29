@@ -1,31 +1,103 @@
 import axios from 'axios';
-import { setFolder } from '../redux/currentSlice';
 
 class AxiosHelper {
-	//postUser() {}
-
-	//getUser() {}
+	process = false;
 
 	createFolder(folderName) {
-		axios.get('http://localhost:3003/api/v1/folder', {
-			folder_name: folderName,
+		return new Promise((resolve, reject) => {
+			axios
+				.post('http://localhost:3003/api/v1/folder', {
+					folder_name: folderName,
+				})
+				.then((response) => {
+					resolve(response);
+				})
+				.catch((err) => {
+					reject(err);
+				});
+		});
+	}
+
+	getFolder(folderId) {
+		return new Promise((resolve, reject) => {
+			axios
+				.get(`http://localhost:3003/api/v1/folder/${folderId}`)
+				.then((response) => {
+					resolve(response);
+				})
+				.catch((err) => {
+					reject(err);
+				});
+		});
+	}
+
+	updateFolder(folderId, data) {
+		return new Promise((resolve, reject) => {
+			axios
+				.put(`http://localhost:3003/api/v1/folder/${folderId}`, data)
+				.then((response) => {
+					resolve(response);
+				})
+				.catch((err) => {
+					reject(err);
+				});
 		});
 	}
 
 	deleteFolder(folderId) {
-		axios.delete(`http://localhost:3003/api/v1/folder/${folderId}`);
+		return new Promise((resolve, reject) => {
+			axios
+				.delete(`http://localhost:3003/api/v1/folder/${folderId}`)
+				.then((response) => {
+					resolve(response);
+				})
+				.catch((err) => {
+					reject(err);
+				});
+		});
 	}
 
-	uploadFile() {
-		axios.post(`http://localhost:3003/api/v1/item`, {}); //TODO set data
+	postItem(newFile) {
+		const uploadFile = {
+			item_name: newFile.name,
+			item_total_size: newFile.size,
+		};
+		return new Promise((resolve, reject) => {
+			axios
+				.post(`http://localhost:3003/api/v1/item`, uploadFile)
+				.then((response) => {
+					resolve(response);
+				})
+				.catch((err) => {
+					reject(err);
+				});
+		});
 	}
 
-	downloadFile(itemId) {
-		axios.get(`http://localhost:3003/api/v1/item/${itemId}`);
+	getItem(itemId) {
+		return new Promise((resolve, reject) => {
+			axios
+				.get(`http://localhost:3003/api/v1/item/${itemId}`)
+				.then((response) => {
+					resolve(response);
+				})
+				.catch((err) => {
+					reject(err);
+				});
+		});
 	}
 
 	deleteFile(itemId) {
-		axios.delete(`http://localhost:3003/api/v1/item/${itemId}`);
+		return new Promise((resolve, reject) => {
+			axios
+				.delete(`http://localhost:3003/api/v1/item/${itemId}`)
+				.then((response) => {
+					resolve(response);
+				})
+				.catch((err) => {
+					reject(err);
+				});
+		});
 	}
 }
 

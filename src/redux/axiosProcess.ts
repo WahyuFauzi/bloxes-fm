@@ -26,7 +26,6 @@ export const axiosProcessSlice = createSlice({
 		},
 		setSelectedFile: (state, action) => {
 			state.selectedFile = action.payload;
-			console.log(state.selectedFile);
 		},
 		emptyingSelectedFile: (state) => {
 			state.selectedFile = {
