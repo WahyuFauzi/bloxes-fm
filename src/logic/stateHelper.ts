@@ -1,8 +1,8 @@
 import { store } from '../redux/store';
 import axiosHelper from './axiosHelper.js';
-
 import { setCurrentFolder, setPath } from '../redux/currentSlice';
 
+//TODO one per component or just this one for every component
 class StateHelper {
 	constructor(store) {
 		this.store = store;

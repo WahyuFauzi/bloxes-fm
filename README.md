@@ -8,10 +8,6 @@ make sure you run the backend first
 
 here's the link: `https://github.com/WahyuFauzi/bloxes-itemdb-spring`
 
-or, if you prefer using javascript,
-
-you could use `https://github.com/WahyuFauzi/bloxes-itemdb`
-
 ## run the service
 
 `npm run dev`
