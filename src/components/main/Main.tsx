@@ -5,7 +5,7 @@ import PlainContext from '../contextMenu/PlainContext';
 import FolderList from '../mapping/FolderList.jsx';
 import FileList from '../mapping/FileList.jsx';
 import stateHelper from '../../logic/stateHelper';
-import ArrowCircleLeft from '../icon/arrow-circle-left.jsx';
+import ArrowCircleLeft from '../../assets/icon/arrow-circle-left.jsx';
 import { hideFolderNameInput } from '../../redux/currentSlice';
 import { setSelectedFile } from '../../redux/axiosProcess';
 import { setPosition, setRenderConditionTrue } from '../../redux/contextSlice';
