@@ -1,26 +1,16 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { setRenderConditionFalse } from '../../redux/contextSlice';
-import stateHelper from '../../logic/stateHelper';
+import { store } from '@/redux/store';
+import ContextViewModel from './ContextViewModel';
+
+const logic = new ContextViewModel(store);
 
 export default function FolderContext() {
-	const dispatch = useDispatch();
-
-	const selectedFolder = useSelector(
-		(state: any) => state.axiosProcess.selectedFile
-	);
-
-	const handleDeleteFolderClick = () => {
-		stateHelper.deleteFolder(selectedFolder.id);
-		dispatch(setRenderConditionFalse());
-	};
-
 	return (
 		<div className="w-full my-2">
 			<ul className="w-full h-full">
 				<li
 					className="w-full h-full cursor-pointer hover:bg-gray-600"
-					onClick={handleDeleteFolderClick}
+					onClick={logic.handleDeleteFolderClick}
 				>
 					delete folder
 				</li>

@@ -1,7 +1,6 @@
 import React from 'react';
 import Folder from '../../../assets/icon/folder';
-import stateHelper from '../../../logic/stateHelper';
-import { store } from '../../../redux/store';
+import { store } from '@/redux/store';
 import FolderListLogic from './FolderListLogic';
 
 const logic = new FolderListLogic(store);
@@ -16,7 +15,7 @@ function folderList(folders) {
 					logic.handelContext(e, j);
 				}}
 				onDoubleClick={() => {
-					stateHelper.openFolder(j.id);
+					logic.openFolder(j.id);
 				}}
 			>
 				<Folder className="w-24 h-36 mx-auto" color="gray" />

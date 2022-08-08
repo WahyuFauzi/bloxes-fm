@@ -6,9 +6,13 @@ import FolderList from '../mapping/folderMapping/FolderList.jsx';
 import FileList from '../mapping/fileMapping/FileList.jsx';
 import stateHelper from '../../logic/stateHelper';
 import ArrowCircleLeft from '../../assets/icon/arrow-circle-left.jsx';
+import MainViewModel from './MainViewModel';
 import { hideFolderNameInput } from '../../redux/currentSlice';
 import { setSelectedFile } from '../../redux/axiosProcess';
 import { setPosition, setRenderConditionTrue } from '../../redux/contextSlice';
+import { store } from '../../redux/store';
+
+const viewModel = new MainViewModel(store);
 
 export default function Header() {
 	const dispatch = useDispatch();
@@ -20,47 +24,28 @@ export default function Header() {
 		(state: any) => state.current.currentFolder
 	);
 
+	//NOTE state in viewmodel not reactive
 	const [folderName, setFolderName] = useState('');
-
-	//TODO modularize this logic
 
 	const handleInputChange = (e) => {
 		setFolderName(e.target.value);
 	};
 
 	const handleOnInputClose = () => {
-		dispatch(hideFolderNameInput());
+		viewModel.hideFolderNameInput();
 	};
 
 	const handleButtonOnClick = () => {
-		stateHelper.createFolder(folderName);
-		setFolderName('');
-		dispatch(hideFolderNameInput());
+		viewModel.createFolder(folderName);
+		viewModel.hideFolderNameInput();
 	};
 
 	const handleBackButtonClick = () => {
-		stateHelper.backToParentFolder();
+		viewModel.backToParentFolder();
 	};
 
 	const handleClick = (e) => {
-		e.preventDefault();
-		e.stopPropagation();
-		dispatch(
-			setSelectedFile({
-				id: '',
-				type: '',
-			})
-		);
-		let x;
-		let y;
-		e.pageX + 120 > window.innerWidth
-			? (x = window.innerWidth - 140)
-			: (x = e.pageX);
-		e.pageY + 80 > window.innerHeight
-			? (y = window.innerHeight - 90)
-			: (y = e.pageY - 20);
-		dispatch(setPosition({ x: x, y: y }));
-		dispatch(setRenderConditionTrue());
+		viewModel.handleContextMenu(e);
 	};
 
 	return (

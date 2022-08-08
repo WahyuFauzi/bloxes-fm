@@ -1,37 +1,23 @@
 import React from 'react';
-import { showFolderNameInput } from '../../redux/currentSlice';
-import { useDispatch } from 'react-redux';
-import { setRenderConditionFalse } from '../../redux/contextSlice';
-import stateHelper from '../../logic/stateHelper';
+import { store } from '@/redux/store';
+import ContextViewModel from '@/components/contextMenu/ContextViewModel';
+
+const logic = new ContextViewModel(store);
 
 export default function MainContext() {
-	const dispatch = useDispatch();
-
 	let inputElement;
 	let fileUpload;
 
-	const handlCreateFolderClick = () => {
-		dispatch(showFolderNameInput());
-		dispatch(setRenderConditionFalse());
-	};
-
 	const handleUploadFileClick = () => {
 		inputElement.click();
-		dispatch(setRenderConditionFalse());
-	};
-
-	const handleInputChange = (e) => {
-		fileUpload = e.target.files[0];
-		if (fileUpload !== undefined && fileUpload !== null) {
-			stateHelper.uploadFile(fileUpload);
-		}
+		logic.setRenderConditionFalse();
 	};
 
 	return (
 		<div className="w-full my-2">
 			<ul className="w-full h-full">
 				<li
-					onClick={handlCreateFolderClick}
+					onClick={logic.handlCreateFolderClick}
 					className="w-full h-full cursor-pointer hover:bg-gray-600"
 				>
 					create folder
@@ -47,7 +33,7 @@ export default function MainContext() {
 							ref={(input) => (inputElement = input)}
 							type="file"
 							value={fileUpload}
-							onChange={handleInputChange}
+							onChange={logic.handleInputChange}
 						/>
 					</div>
 				</li>

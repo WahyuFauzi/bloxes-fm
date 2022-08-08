@@ -19,21 +19,21 @@ export default function SideBar() {
 							Files
 						</li>
 					</Link>
-					{/*<Link to="recyclebin">
-						<li className="h-8 pt-1 mx-4 mt-2 rounded cursor-pointer">
-							Recent
-						</li>
-					</Link>
-					<Link to="recyclebin">
-						<li className="h-8 pt-1 mx-4 mt-2 rounded cursor-pointer">
-							Pinned
-						</li>
-					</Link>
 					<Link to="recyclebin">
 						<li className="h-8 pt-1 mx-4 mt-2 rounded cursor-pointer">
 							Recycle Bin
 						</li>
-					</Link>*/}
+					</Link>
+					<Link to="pinned">
+						<li className="h-8 pt-1 mx-4 mt-2 rounded cursor-pointer">
+							Pinned
+						</li>
+					</Link>
+					<Link to="recent">
+						<li className="h-8 pt-1 mx-4 mt-2 rounded cursor-pointer">
+							Recent
+						</li>
+					</Link>
 				</ul>
 			</div>
 		</div>

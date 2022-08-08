@@ -2,12 +2,13 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Main from './components/main/Main.jsx';
 import Layout from './components/Layout.jsx';
-import stateHelper from './logic/stateHelper.js';
+import { store } from '@/redux/store';
+import AppViewModel from './AppViewModel.js';
 
-// TODO separate the logic from UI component
+const viewModel = new AppViewModel(store);
 
 function App() {
-	stateHelper.onInit();
+	viewModel.onInit();
 	return (
 		<Layout>
 			<Routes>
