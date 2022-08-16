@@ -29,11 +29,6 @@ export default function SideBar() {
 							Pinned
 						</li>
 					</Link>
-					<Link to="recent">
-						<li className="h-8 pt-1 mx-4 mt-2 rounded cursor-pointer">
-							Recent
-						</li>
-					</Link>
 				</ul>
 			</div>
 		</div>

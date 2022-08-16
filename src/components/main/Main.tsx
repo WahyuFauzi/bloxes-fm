@@ -1,15 +1,10 @@
-import React from 'react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PlainContext from '../contextMenu/PlainContext';
 import FolderList from '../mapping/folderMapping/FolderList.jsx';
 import FileList from '../mapping/fileMapping/FileList.jsx';
-import stateHelper from '../../logic/stateHelper';
 import ArrowCircleLeft from '../../assets/icon/arrow-circle-left.jsx';
 import MainViewModel from './MainViewModel';
-import { hideFolderNameInput } from '../../redux/currentSlice';
-import { setSelectedFile } from '../../redux/axiosProcess';
-import { setPosition, setRenderConditionTrue } from '../../redux/contextSlice';
 import { store } from '../../redux/store';
 
 const viewModel = new MainViewModel(store);

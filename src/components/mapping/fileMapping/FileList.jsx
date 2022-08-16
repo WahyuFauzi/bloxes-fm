@@ -1,4 +1,3 @@
-import React from 'react';
 import Document from '../../../assets/icon/document';
 import FileListLogic from './FileListLogic';
 import { store } from '../../../redux/store';

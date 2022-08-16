@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import NavBar from './navbar/NavBar.jsx';
 import SideBar from './sidebar/SideBar.jsx';
 import './Layout.css';

@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// NOTE redux or global state?
 export const axiosProcessSlice = createSlice({
 	name: 'axiosProcess',
 	initialState: {

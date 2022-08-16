@@ -1,4 +1,3 @@
-import React from 'react';
 import Folder from '../../../assets/icon/folder';
 import { store } from '@/redux/store';
 import FolderListLogic from './FolderListLogic';

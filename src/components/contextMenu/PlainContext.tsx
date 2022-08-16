@@ -1,11 +1,9 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import FolderContext from './FolderContext';
 import FileContext from '@/components/contextMenu/FileContext';
 import MainContext from './MainContext.js';
 import { store } from '@/redux/store';
-import { setRenderConditionFalse } from '../../redux/contextSlice';
 import ContextViewModel from '@/components/contextMenu/ContextViewModel';
 
 const logic = new ContextViewModel(store);

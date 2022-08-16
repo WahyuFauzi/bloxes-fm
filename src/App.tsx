@@ -1,7 +1,8 @@
-import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Main from './components/main/Main.jsx';
 import Layout from './components/Layout.jsx';
+import Main from './components/main/Main.jsx';
+import Pinned from './components/pinned/Pinned.js';
+import Recyclebin from './components/recycleBin/RecycleBin.js';
 import { store } from '@/redux/store';
 import AppViewModel from './AppViewModel.js';
 
@@ -13,6 +14,8 @@ function App() {
 		<Layout>
 			<Routes>
 				<Route path="/" element={<Main />} />
+				<Route path="/pinned" element={<Pinned />} />
+				<Route path="/recyclebin" element={<Recyclebin />} />
 			</Routes>
 		</Layout>
 	);
