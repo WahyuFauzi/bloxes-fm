@@ -1,10 +1,14 @@
+import SampleFileEntity from '../file/SampleFileEntity';
+import SampleUserEntity from '../user/SampleUserEntity';
+import SampleFolderEntity from './SampleFolderEntity';
+
 export default class FolderEntity {
 	constructor(
 		id: string,
 		folder_name: string,
-		nested_folders: Array<string>,
-		items: Array<string>,
-		shared_user: Array<string>,
+		nested_folders: Array<SampleFolderEntity>,
+		items: Array<SampleFileEntity>,
+		shared_user: Array<SampleUserEntity>,
 		created_at: string,
 		updated_at: string
 	) {
@@ -19,9 +23,9 @@ export default class FolderEntity {
 
 	readonly id: string;
 	readonly folder_name: string;
-	readonly nested_folders: Array<string>;
-	readonly items: Array<string>;
-	readonly sharedUser: Array<string>;
+	readonly nested_folders: Array<SampleFolderEntity>;
+	readonly items: Array<SampleFileEntity>;
+	readonly sharedUser: Array<SampleUserEntity>;
 	readonly created_at: string;
 	readonly updated_at: string;
 }

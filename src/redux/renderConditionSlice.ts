@@ -4,6 +4,7 @@ export const renderConditionSlice = createSlice({
 	name: 'render',
 	initialState: {
 		folderInputCondition: 'hidden',
+		contextRenderCondition: false,
 	},
 	reducers: {
 		showFolderNameInput: (state) => {
@@ -12,10 +13,20 @@ export const renderConditionSlice = createSlice({
 		hideFolderNameInput: (state) => {
 			state.folderInputCondition = 'hidden';
 		},
+		setRenderConditionTrue: (state) => {
+			state.contextRenderCondition = true;
+		},
+		setRenderConditionFalse: (state) => {
+			state.contextRenderCondition = false;
+		},
 	},
 });
 
-export const { showFolderNameInput, hideFolderNameInput } =
-	renderConditionSlice.actions;
+export const {
+	showFolderNameInput,
+	hideFolderNameInput,
+	setRenderConditionTrue,
+	setRenderConditionFalse,
+} = renderConditionSlice.actions;
 
 export default renderConditionSlice.reducer;

@@ -1,15 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
+import PositionEntity from '@/entity/PositionEntity';
+
+const initPosition = new PositionEntity(0, 0);
 
 export const contextSlice = createSlice({
 	name: 'context',
 	initialState: {
-		position: { x: 0, y: 0 },
+		position: initPosition,
 		renderCondition: false,
 	},
 	reducers: {
 		setPosition: (state, action) => {
-			state.position.x = action.payload.x;
-			state.position.y = action.payload.y;
+			state.position = action.payload as PositionEntity;
 		},
 		setRenderConditionTrue: (state) => {
 			state.renderCondition = true;
