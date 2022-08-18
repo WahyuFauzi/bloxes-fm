@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// this doesnt uploaded to state
 export const renderConditionSlice = createSlice({
 	name: 'render',
 	initialState: {
