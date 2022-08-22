@@ -1,8 +1,8 @@
-import { setSelectedFile } from '../../../redux/axiosProcess';
+import { setSelectedFile } from '@/redux/axiosProcess';
 import {
 	setPosition,
 	setRenderConditionTrue,
-} from '../../../redux/contextSlice';
+} from '@/redux/contextSlice';
 
 export default class FileListLogic {
 	constructor(store) {

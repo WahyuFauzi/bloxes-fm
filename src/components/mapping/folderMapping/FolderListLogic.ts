@@ -1,10 +1,11 @@
-import { setSelectedFile } from '../../../redux/axiosProcess';
+import { setSelectedFile } from '@/redux/axiosProcess';
 import {
 	setPosition,
 	setRenderConditionTrue,
-} from '../../../redux/contextSlice';
-import axiosHelper from '@/logic/axiosHelper.js';
+} from '@/redux/contextSlice';
+import folderAxios from "@/logic/FolderAxios";
 import { setCurrentFolder, setPath } from '@/redux/currentSlice';
+import FolderEntity from "@/entity/folder/FolderEntity";
 
 export default class FolderListLogic {
 	constructor(store) {
@@ -39,13 +40,16 @@ export default class FolderListLogic {
 		const parsedCurrentPath = JSON.parse(JSON.stringify(currentPath));
 		parsedCurrentPath.push(folderId);
 		this.store.dispatch(setPath(parsedCurrentPath));
-		axiosHelper.getFolder(folderId).then((response) => {
-			const newCurrentFolder = {
-				id: response.data.data.id,
-				folder_name: response.data.data.folder_name,
-				nested_folders: response.data.data.nested_folders,
-				items: response.data.data.items,
-			};
+		folderAxios.getFolder(folderId).then((data: any) => {
+			const newCurrentFolder = new FolderEntity(
+				data.id,
+				data.folder_name,
+				data.nested_folders,
+				data.items,
+				data.shared_user,
+				data.created_at,
+				data.updated_at
+			)
 			this.store.dispatch(setCurrentFolder(newCurrentFolder));
 		});
 	}

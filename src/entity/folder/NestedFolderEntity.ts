@@ -1,4 +1,4 @@
-export default class SampleFolderEntity {
+export default class NestedFolderEntity {
 	constructor(id: string, folder_name: string) {
 		this.id = id;
 		this.folder_name = folder_name;

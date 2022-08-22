@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 class AxiosHelper {
-	process = false;
+	folderUrl = 'http://localhost:3003/api/v1/folder';
 
 	createFolder(folderName) {
 		return new Promise((resolve, reject) => {

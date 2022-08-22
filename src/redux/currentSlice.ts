@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import SampleItemEntity from '@/entity/file/SampleFileEntity';
+import SampleItemEntity from '@/entity/file/NestedFileEntity';
 import FolderEntity from '@/entity/folder/FolderEntity';
-import SampleFolderEntity from '@/entity/folder/SampleFolderEntity';
+import NestedFolderEntity from '@/entity/folder/NestedFolderEntity';
 
 const initPath: Array<string> = [];
 
@@ -34,20 +34,21 @@ export const currentSlice = createSlice({
 	},
 	reducers: {
 		setPath: (state, action) => {
-			state.currentPath = action.payload as Array<string>;
+			state.currentPath = action.payload;
 		},
 
 		setCurrentFolder: (state, action) => {
-			state.currentFolder = action.payload as FolderEntity;
+			const data: FolderEntity = action.payload
+			state.currentFolder = data;
 		},
 
 		setNestedFolders: (state, action) => {
 			state.currentFolder.nested_folders =
-				action.payload as Array<SampleFolderEntity>;
+				action.payload;
 		},
 
 		setItems: (state, action) => {
-			state.currentFolder.items = action.payload as Array<SampleItemEntity>;
+			state.currentFolder.items = action.payload;
 		},
 
 		showFolderNameInput: (state) => {
@@ -62,8 +63,6 @@ export const currentSlice = createSlice({
 
 export const {
 	setCurrentFolder,
-	setNestedFolders,
-	setItems,
 	setPath,
 	showFolderNameInput,
 	hideFolderNameInput,

@@ -1,26 +1,47 @@
-import axiosHelper from '@/logic/axiosHelper';
-import { setCurrentFolder, setPath } from '@/redux/currentSlice';
+import {setCurrentFolder, setPath} from '@/redux/currentSlice';
+import FolderEntity from "@/entity/folder/FolderEntity";
 
 export default class AppViewModel {
-	constructor(store) {
-		this.store = store;
-	}
-	store;
+    constructor(store, folderAxios) {
+        this.store = store;
+        this.folderAxios = folderAxios
+    }
 
-	onInit() {
-		const initFolderId = localStorage.getItem('init_folder_id');
+    store;
+    folderAxios
 
-		if (initFolderId === undefined || initFolderId === null) {
-			axiosHelper.createFolder('init folder').then((response) => {
-				localStorage.setItem('init_folder_id', response.data.data.id);
-				this.store.dispatch(setPath([response.data.data.id]));
-				this.store.dispatch(setCurrentFolder(response.data.data));
-			});
-		} else {
-			axiosHelper.getFolder(initFolderId).then((response) => {
-				this.store.dispatch(setPath([response.data.data.id]));
-				this.store.dispatch(setCurrentFolder(response.data.data));
-			});
-		}
-	}
+    onInit() {
+        const initFolderId = localStorage.getItem('init_folder_id');
+
+        if (initFolderId === undefined || initFolderId === null) {
+            this.folderAxios.createFolder('init folder').then((data: any) => {
+                const newCurrentFolder = new FolderEntity(
+                    data.id,
+                    data.folder_name,
+                    data.nested_folders,
+                    data.items,
+                    data.shared_user,
+                    data.created_at,
+                    data.updated_at
+                )
+                localStorage.setItem('init_folder_id', data.id);
+                this.store.dispatch(setPath([data.id]));
+                this.store.dispatch(setCurrentFolder(newCurrentFolder));
+            });
+        } else {
+            this.folderAxios.getFolder(initFolderId).then((data: any) => {
+                const newCurrentFolder = new FolderEntity(
+                    data.id,
+                    data.folder_name,
+                    data.nested_folders,
+                    data.items,
+                    data.shared_user,
+                    data.created_at,
+                    data.updated_at
+                )
+                this.store.dispatch(setPath([data.id]));
+                this.store.dispatch(setCurrentFolder(newCurrentFolder));
+            });
+        }
+    }
 }

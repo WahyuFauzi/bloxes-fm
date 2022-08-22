@@ -1,9 +1,6 @@
 import axiosHelper from '@/logic/axiosHelper.js';
 import { setRenderConditionFalse } from '@/redux/contextSlice';
 import { setCurrentFolder, showFolderNameInput } from '@/redux/currentSlice';
-import FolderContext from './FolderContext';
-import FileContext from '@/components/contextMenu/FileContext';
-import MainContext from './MainContext.js';
 
 export default class ContextViewModel {
 	constructor(store) {
@@ -14,7 +11,7 @@ export default class ContextViewModel {
 	uploadFile() {
 		const currentFolder = this.store.getState().current.currentFolder;
 		const selectedFile = this.store.getState().axiosProcess.selectedFile;
-		axiosHelper.postItem(selectedFile).then((response) => {
+		axiosHelper.postItem(selectedFile).then((response: any) => {
 			const newItem = {
 				id: response.data.data.id,
 				item_name: response.data.data.item_name,
@@ -54,7 +51,7 @@ export default class ContextViewModel {
 		const fileUpload = e.target.files[0];
 		if (fileUpload !== undefined && fileUpload !== null) {
 			const currentFolder = this.store.getState().current.currentFolder;
-			axiosHelper.postItem(fileUpload).then((response) => {
+			axiosHelper.postItem(fileUpload).then((response: any) => {
 				const newItem = {
 					id: response.data.data.id,
 					item_name: response.data.data.item_name,
@@ -89,7 +86,7 @@ export default class ContextViewModel {
 	};
 
 	// File Context
-	handleDeleteFileClick = () => {
+	handleDeleteFileClick = async () => {
 		// get current data
 		const currentFolder = this.store.getState().current.currentFolder;
 		const selectedFile = this.store.getState().axiosProcess.selectedFile;
