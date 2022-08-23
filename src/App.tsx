@@ -1,17 +1,20 @@
-import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Main from './components/main/Main.jsx';
-import Layout from './components/Layout.jsx';
-import stateHelper from './logic/stateHelper.js';
+import Layout from './components/Layout';
+import Main from './components/main/Main';
+import AppViewModel from '@/AppViewModel';
+import { store } from '@/redux/store';
+import folderAxios from '@/logic/FolderAxios';
 
-// TODO separate the logic from UI component
+const viewModel = new AppViewModel(store, folderAxios);
 
 function App() {
-	stateHelper.onInit();
+	viewModel.onInit();
 	return (
 		<Layout>
 			<Routes>
 				<Route path="/" element={<Main />} />
+				{/*<Route path="/pinned" element={<Pinned />} />
+				<Route path="/recyclebin" element={<Recyclebin />} />*/}
 			</Routes>
 		</Layout>
 	);

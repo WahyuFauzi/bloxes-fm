@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react';
-import NavBar from './navbar/NavBar.jsx';
-import SideBar from './sidebar/SideBar.jsx';
+import { ReactNode } from 'react';
+import NavBar from './navbar/NavBar';
+import SideBar from './sidebar/SideBar';
 import './Layout.css';
 
 interface Props {

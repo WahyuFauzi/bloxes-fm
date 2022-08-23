@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import UserEntity from '../entity/user/UserEntity';
 
 export const userSlice = createSlice({
 	name: 'user',
@@ -7,7 +8,8 @@ export const userSlice = createSlice({
 	},
 	reducers: {
 		setUser: (state, action) => {
-			state.user = action.payload;
+			const user: UserEntity = action.payload;
+			state.user = user;
 		},
 	},
 });

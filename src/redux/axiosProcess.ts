@@ -1,14 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
+import SelectedItemEntity from '../entity/SelectedItemEntity';
 
-// NOTE redux or global state?
+const initSelectedFile: SelectedItemEntity = {
+	id: '',
+	file_type: '',
+};
 export const axiosProcessSlice = createSlice({
 	name: 'axiosProcess',
 	initialState: {
-		fileUploaded: '',
-		selectedFile: {
-			id: '',
-			type: '',
-		},
+		fileUploaded: '', // TODO implement entity for this
+		selectedFile: initSelectedFile,
 	},
 	reducers: {
 		setFileUpload: (state, action) => {
@@ -20,11 +21,8 @@ export const axiosProcessSlice = createSlice({
 		setSelectedFile: (state, action) => {
 			state.selectedFile = action.payload;
 		},
-		emptyingSelectedFile: (state) => {
-			state.selectedFile = {
-				id: '',
-				type: '',
-			};
+		emptyingSelectedFile: (state, action) => {
+			state.selectedFile = action.payload;
 		},
 	},
 });

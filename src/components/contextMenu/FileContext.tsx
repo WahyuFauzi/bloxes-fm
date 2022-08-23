@@ -1,24 +1,17 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { setRenderConditionFalse } from '../../redux/contextSlice';
-import stateHelper from '../../logic/stateHelper';
+import { store } from '@/redux/store';
+import ContextViewModel from '@/components/contextMenu/ContextViewModel';
+
+const logic = new ContextViewModel(store);
+
+//TODO inspect why vite cant import redux store in nested folder deeper than this
+
 export default function FileContext() {
-	const dispatch = useDispatch();
-	const selectedFile = useSelector(
-		(state: any) => state.axiosProcess.selectedFile
-	);
-
-	const handleDeletedFileClick = () => {
-		stateHelper.deleteFile(selectedFile.id);
-		dispatch(setRenderConditionFalse());
-	};
-
 	return (
 		<div className="w-full my-2">
 			<ul className="w-full h-full">
 				<li
 					className="w-full h-full cursor-pointer hover:bg-gray-600"
-					onClick={handleDeletedFileClick}
+					onClick={logic.handleDeleteFileClick}
 				>
 					delete file
 				</li>

@@ -1,10 +1,12 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import FolderContext from './FolderContext';
-import FileContext from './FileContext';
-import MainContext from './MainContext.js';
-import { setRenderConditionFalse } from '../../redux/contextSlice';
+import FileContext from '@/components/contextMenu/FileContext';
+import MainContext from './MainContext';
+import { store } from '@/redux/store';
+import ContextViewModel from '@/components/contextMenu/ContextViewModel';
+
+const logic = new ContextViewModel(store);
 
 PlainContext.propTypes = {
 	top: PropTypes.number,
@@ -12,8 +14,6 @@ PlainContext.propTypes = {
 };
 
 export default function PlainContext(props) {
-	const dispatch = useDispatch();
-
 	const selectedFile = useSelector(
 		(state: any) => state.axiosProcess.selectedFile
 	);
@@ -28,10 +28,6 @@ export default function PlainContext(props) {
 	} else {
 		classes = 'hidden';
 	}
-
-	const handleOnLeave = () => {
-		dispatch(setRenderConditionFalse());
-	};
 
 	const contextManager = (type: string) => {
 		switch (type) {
@@ -53,7 +49,7 @@ export default function PlainContext(props) {
 				top: props.top,
 				left: props.left,
 			}}
-			onMouseLeave={handleOnLeave}
+			onMouseLeave={logic.setRenderConditionFalse}
 		>
 			{contextManager(selectedFile.type)}
 		</div>
