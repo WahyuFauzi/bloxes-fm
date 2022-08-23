@@ -1,6 +1,8 @@
-import axiosHelper from '@/logic/axiosHelper.js';
 import { setRenderConditionFalse } from '@/redux/contextSlice';
 import { setCurrentFolder, showFolderNameInput } from '@/redux/currentSlice';
+import fileAxios from '@/logic/FileAxios';
+import folderAxios from '@/logic/FolderAxios';
+import CreateFileRequest from '../../entity/file/CreateFileRequest';
 
 export default class ContextViewModel {
 	constructor(store) {
@@ -11,7 +13,7 @@ export default class ContextViewModel {
 	uploadFile() {
 		const currentFolder = this.store.getState().current.currentFolder;
 		const selectedFile = this.store.getState().axiosProcess.selectedFile;
-		axiosHelper.postItem(selectedFile).then((response: any) => {
+		fileAxios.postFile(selectedFile).then((response: any) => {
 			const newItem = {
 				id: response.data.data.id,
 				item_name: response.data.data.item_name,
@@ -32,7 +34,7 @@ export default class ContextViewModel {
 			nested_folders: updatedFolder.nested_folders,
 			items: updatedFolder.items,
 		};
-		axiosHelper
+		folderAxios
 			.updateFolder(updatedFolder.id, newFolder)
 			.then((response) => console.log(response));
 	}
@@ -49,17 +51,21 @@ export default class ContextViewModel {
 
 	handleInputChange = (e) => {
 		const fileUpload = e.target.files[0];
+		console.log(fileUpload);
 		if (fileUpload !== undefined && fileUpload !== null) {
 			const currentFolder = this.store.getState().current.currentFolder;
-			axiosHelper.postItem(fileUpload).then((response: any) => {
-				const newItem = {
-					id: response.data.data.id,
-					item_name: response.data.data.item_name,
-				};
-				const newCurrentFolder = JSON.parse(JSON.stringify(currentFolder));
-				newCurrentFolder.items.push(newItem);
-				this.updateFolder(newCurrentFolder);
-			});
+			fileAxios
+				.postFile(new CreateFileRequest(fileUpload.name, fileUpload.size))
+				.then((data: any) => {
+					const newItem = {
+						id: data.id,
+						item_name: data.file_name,
+					};
+					console.log(newItem);
+					const newCurrentFolder = JSON.parse(JSON.stringify(currentFolder));
+					newCurrentFolder.items.push(newItem);
+					this.updateFolder(newCurrentFolder);
+				});
 		}
 	};
 
@@ -74,7 +80,7 @@ export default class ContextViewModel {
 		});
 
 		// delete folder from database
-		axiosHelper.deleteFolder(selectedFile.id).then();
+		folderAxios.deleteFolder(selectedFile.id).then();
 
 		// update folder in database
 		const newCurrentFolder = JSON.parse(JSON.stringify(currentFolder));
@@ -96,7 +102,7 @@ export default class ContextViewModel {
 		});
 
 		// delete file from database
-		axiosHelper.deleteFile(selectedFile.id).then();
+		fileAxios.deleteFile(selectedFile.id).then();
 
 		// update folder in database
 		const newCurrentFolder = JSON.parse(JSON.stringify(currentFolder));
@@ -106,7 +112,7 @@ export default class ContextViewModel {
 			nested_folders: newCurrentFolder.nested_folders,
 			items: newCurrentFolder.items,
 		};
-		axiosHelper
+		folderAxios
 			.updateFolder(newCurrentFolder.id, newFolder)
 			.then((response) => console.log(response));
 		this.updateFolder(newCurrentFolder);

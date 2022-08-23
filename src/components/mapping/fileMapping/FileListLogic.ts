@@ -1,8 +1,5 @@
 import { setSelectedFile } from '@/redux/axiosProcess';
-import {
-	setPosition,
-	setRenderConditionTrue,
-} from '@/redux/contextSlice';
+import { setPosition, setRenderConditionTrue } from '@/redux/contextSlice';
 
 export default class FileListLogic {
 	constructor(store) {
@@ -27,7 +24,7 @@ export default class FileListLogic {
 		e.pageY + 80 > window.innerHeight
 			? (y = window.innerHeight - 90)
 			: (y = e.pageY - 20);
-		console.log(`${x} dan ${y}`);
+		console.log(item);
 		this.store.dispatch(setPosition({ x: x, y: y }));
 		this.store.dispatch(setRenderConditionTrue());
 	};

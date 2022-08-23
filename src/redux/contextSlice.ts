@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import PositionEntity from '@/entity/PositionEntity';
 
-const initPosition = new PositionEntity(0, 0);
+const initPosition: PositionEntity = {
+	x: 0,
+	y: 0
+}
 
 export const contextSlice = createSlice({
 	name: 'context',

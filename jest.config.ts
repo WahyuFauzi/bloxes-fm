@@ -1,11 +1,18 @@
 import type { Config } from '@jest/types';
+import path from 'path';
 
-// Or async function
 export default async (): Promise<Config.InitialOptions> => {
 	return {
 		preset: 'ts-jest',
-		testEnvironment: 'node',
+		testEnvironment: 'jsdom',
 		verbose: true,
-		roots: ['./test'],
+		roots: ['./src/test'],
+		moduleDirectories: ['node_modules', 'src'],
+		moduleNameMapper: {
+			'@/(.*)': '<rootDir>/src/$1',
+		},
+		setupFiles: [
+			"./src/test/mocked/localStorageMock.js",
+		]
 	};
 };

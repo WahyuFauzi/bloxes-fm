@@ -1,6 +1,6 @@
-import Document from '../../../assets/icon/document';
+import Document from '../../../assets/icon/document.jsx';
+import { store } from '@/redux/store.ts';
 import FileListLogic from './FileListLogic';
-import { store } from '../../../redux/store';
 
 const logic = new FileListLogic(store);
 

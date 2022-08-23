@@ -1,7 +1,8 @@
-import axiosHelper from '@/logic/axiosHelper';
 import { hideFolderNameInput, setCurrentFolder } from '@/redux/currentSlice';
 import { setPosition, setRenderConditionTrue } from '@/redux/contextSlice';
 import { setSelectedFile } from '@/redux/axiosProcess';
+import folderAxios from '@/logic/FolderAxios';
+import CreateFolderRequest from '../../entity/folder/CreateFolderRequest';
 
 export default class MainViewModel {
 	constructor(store) {
@@ -9,7 +10,6 @@ export default class MainViewModel {
 	}
 
 	store;
-	folderName = '';
 
 	hideFolderNameInput() {
 		this.store.dispatch(hideFolderNameInput());
@@ -43,22 +43,24 @@ export default class MainViewModel {
 			nested_folders: updatedFolder.nested_folders,
 			items: updatedFolder.items,
 		};
-		axiosHelper
+		folderAxios
 			.updateFolder(updatedFolder.id, newFolder)
 			.then((response) => console.log(response));
 	}
 
 	createFolder(folderName) {
 		const currentFolder = this.store.getState().current.currentFolder;
-		axiosHelper.createFolder(folderName).then((response) => {
-			const newFolder = {
-				id: response.data.data.id,
-				folder_name: folderName,
-			};
-			const newCurrentFolder = JSON.parse(JSON.stringify(currentFolder));
-			newCurrentFolder.nested_folders.push(newFolder);
-			this.updateFolder(newCurrentFolder);
-		});
+		folderAxios
+			.createFolder(new CreateFolderRequest(folderName))
+			.then((data: any) => {
+				const newFolder = {
+					id: data.id,
+					folder_name: folderName,
+				};
+				const newCurrentFolder = JSON.parse(JSON.stringify(currentFolder));
+				newCurrentFolder.nested_folders.push(newFolder);
+				this.updateFolder(newCurrentFolder);
+			});
 	}
 
 	backToParentFolder() {
@@ -68,12 +70,12 @@ export default class MainViewModel {
 			parsedCurrentPath.pop();
 		}
 		const lastIndex = parsedCurrentPath.at(-1);
-		axiosHelper.getFolder(lastIndex).then((response) => {
+		folderAxios.getFolder(lastIndex).then((data: any) => {
 			const newCurrentFolder = {
-				id: response.data.data.id,
-				folder_name: response.data.data.folder_name,
-				nested_folders: response.data.data.nested_folders,
-				items: response.data.data.items,
+				id: data.id,
+				folder_name: data.folder_name,
+				nested_folders: data.nested_folders,
+				items: data.items,
 			};
 			this.store.dispatch(setCurrentFolder(newCurrentFolder));
 		});

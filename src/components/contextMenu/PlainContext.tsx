@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import FolderContext from './FolderContext';
 import FileContext from '@/components/contextMenu/FileContext';
-import MainContext from './MainContext.js';
+import MainContext from './MainContext';
 import { store } from '@/redux/store';
 import ContextViewModel from '@/components/contextMenu/ContextViewModel';
 

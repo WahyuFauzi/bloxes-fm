@@ -1,6 +1,6 @@
-import Folder from '../../../assets/icon/folder';
-import { store } from '@/redux/store';
-import FolderListLogic from './FolderListLogic';
+import Folder from '../../../assets/icon/folder.jsx';
+import { store } from '@/redux/store.ts';
+import FolderListLogic from './FolderListLogic.ts';
 
 const logic = new FolderListLogic(store);
 

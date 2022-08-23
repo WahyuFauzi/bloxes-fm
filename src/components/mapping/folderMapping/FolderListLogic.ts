@@ -1,11 +1,8 @@
 import { setSelectedFile } from '@/redux/axiosProcess';
-import {
-	setPosition,
-	setRenderConditionTrue,
-} from '@/redux/contextSlice';
-import folderAxios from "@/logic/FolderAxios";
+import { setPosition, setRenderConditionTrue } from '@/redux/contextSlice';
+import folderAxios from '@/logic/FolderAxios';
 import { setCurrentFolder, setPath } from '@/redux/currentSlice';
-import FolderEntity from "@/entity/folder/FolderEntity";
+import FolderEntity from '@/entity/folder/FolderEntity';
 
 export default class FolderListLogic {
 	constructor(store) {
@@ -30,7 +27,6 @@ export default class FolderListLogic {
 		e.pageY + 80 > window.innerHeight
 			? (y = window.innerHeight - 90)
 			: (y = e.pageY - 20);
-		console.log(`${x} dan ${y}`);
 		this.store.dispatch(setPosition({ x: x, y: y }));
 		this.store.dispatch(setRenderConditionTrue());
 	};
@@ -49,7 +45,7 @@ export default class FolderListLogic {
 				data.shared_user,
 				data.created_at,
 				data.updated_at
-			)
+			);
 			this.store.dispatch(setCurrentFolder(newCurrentFolder));
 		});
 	}

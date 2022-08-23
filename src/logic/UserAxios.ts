@@ -1,5 +1,6 @@
 import axios from 'axios';
 import UpdateUserRequest from '../entity/user/UpdateUserRequest';
+import UserEntity from "@/entity/user/UserEntity";
 
 class UserAxios {
 	private userUrl = 'http://localhost:3003/api/v1/user';
@@ -9,6 +10,22 @@ class UserAxios {
 			axios
 				.get(`${this.userUrl}/${userId}`)
 				.then((response) => {
+					const data: UserEntity = new UserEntity(
+						response.data.data.id,
+						response.data.data.email,
+						response.data.data.password,
+						response.data.data.user_name,
+						response.data.data.subscribed_space,
+						response.data.data.used_space,
+						response.data.data.subscribed_at,
+						response.data.data.end_of_subscription,
+						response.data.data.init_folder,
+						response.data.data.recycle_bin,
+						response.data.data.pinned,
+						response.data.data.recent,
+						response.data.data.created_at,
+						response.data.data.updated_at
+					)
 					resolve(response.data.data);
 				})
 				.catch((err) => {
@@ -22,7 +39,22 @@ class UserAxios {
 			axios
 				.put(`${this.userUrl}/${userId}`, updateUserRequest)
 				.then((response) => {
-					resolve(response.data.data);
+					const data: UserEntity = new UserEntity(
+						response.data.data.id,
+						response.data.data.email,
+						response.data.data.password,
+						response.data.data.user_name,
+						response.data.data.subscribed_space,
+						response.data.data.used_space,
+						response.data.data.subscribed_at,
+						response.data.data.end_of_subscription,
+						response.data.data.init_folder,
+						response.data.data.recycle_bin,
+						response.data.data.pinned,
+						response.data.data.recent,
+						response.data.data.created_at,
+						response.data.data.updated_at
+					)
 				})
 				.catch((err) => {
 					reject(err);

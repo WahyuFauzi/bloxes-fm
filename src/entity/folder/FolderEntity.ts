@@ -16,7 +16,7 @@ export default class FolderEntity {
 		this.folder_name = folder_name;
 		this.nested_folders = nested_folders;
 		this.items = items;
-		this.sharedUser = shared_user;
+		this.shared_user = shared_user;
 		this.created_at = created_at;
 		this.updated_at = updated_at;
 	}
@@ -25,7 +25,7 @@ export default class FolderEntity {
 	readonly folder_name: string;
 	readonly nested_folders: Array<NestedFolderEntity>;
 	readonly items: Array<SampleFileEntity>;
-	readonly sharedUser: Array<SampleUserEntity>;
+	readonly shared_user: Array<SampleUserEntity>;
 	readonly created_at: string;
 	readonly updated_at: string;
 }

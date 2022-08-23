@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import SelectedItemEntity from '../entity/SelectedItemEntity';
 
-const initSelectedFile = new SelectedItemEntity('', '');
+const initSelectedFile: SelectedItemEntity = {
+	id: '',
+	file_type: '',
+};
 export const axiosProcessSlice = createSlice({
 	name: 'axiosProcess',
 	initialState: {
@@ -16,7 +19,7 @@ export const axiosProcessSlice = createSlice({
 			state.fileUploaded = '';
 		},
 		setSelectedFile: (state, action) => {
-			state.selectedFile = action.payload as SelectedItemEntity;
+			state.selectedFile = action.payload;
 		},
 		emptyingSelectedFile: (state, action) => {
 			state.selectedFile = action.payload;

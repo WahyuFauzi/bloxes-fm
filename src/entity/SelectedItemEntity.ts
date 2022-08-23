@@ -1,9 +1,9 @@
 export default class SelectedItemEntity {
-	constructor(id: string, fileType: string) {
+	constructor(id: string, file_type: string) {
 		this.id = id;
-		this.fileType = fileType;
+		this.file_type = file_type;
 	}
 
 	id: string;
-	fileType: string;
+	file_type: string;
 }

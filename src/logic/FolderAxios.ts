@@ -1,10 +1,7 @@
 import axios from 'axios';
 import CreateFolderRequest from '../entity/folder/CreateFolderRequest';
 import UpdateFolderRequest from '../entity/folder/UpdateFolderRequest';
-import FolderEntity from "@/entity/folder/FolderEntity";
-import NestedFolderEntity from "@/entity/folder/NestedFolderEntity";
-import SampleFileEntity from "@/entity/file/NestedFileEntity";
-import SampleUserEntity from "@/entity/user/SampleUserEntity";
+import FolderEntity from '@/entity/folder/FolderEntity';
 
 class FolderAxios {
 	private folderUrl = 'http://localhost:3003/api/v1/folder';
@@ -12,17 +9,19 @@ class FolderAxios {
 	createFolder(createFolderRequest: CreateFolderRequest) {
 		return new Promise((resolve, reject) => {
 			axios
-				.post(this.folderUrl, createFolderRequest)
+				.post(this.folderUrl, {
+					folder_name: createFolderRequest.folder_name,
+				})
 				.then((response) => {
 					const data: FolderEntity = new FolderEntity(
 						response.data.data.id,
 						response.data.data.folder_name,
 						response.data.data.nested_folders,
-						response.data.data.items,
+						response.data.data.files,
 						response.data.data.shared_user,
 						response.data.data.created_at,
 						response.data.data.updated_at
-					)
+					);
 					resolve(data);
 				})
 				.catch((err) => {
@@ -34,17 +33,17 @@ class FolderAxios {
 	getFolder(folderId) {
 		return new Promise((resolve, reject) => {
 			axios
-				.get(`${this.folderUrl}/${folderId}`)
+				.get(`${this.folderUrl}/?folderId=${folderId}`)
 				.then((response) => {
 					const data: FolderEntity = new FolderEntity(
 						response.data.data.id,
 						response.data.data.folder_name,
 						response.data.data.nested_folders,
-						response.data.data.items,
+						response.data.data.files,
 						response.data.data.shared_user,
 						response.data.data.created_at,
 						response.data.data.updated_at
-					)
+					);
 					resolve(data);
 				})
 				.catch((err) => {
@@ -56,17 +55,21 @@ class FolderAxios {
 	updateFolder(folderId, updateFolderRequest: UpdateFolderRequest) {
 		return new Promise((resolve, reject) => {
 			axios
-				.put(`${this.folderUrl}/${folderId}`, updateFolderRequest)
+				.put(`${this.folderUrl}/?folderId=${folderId}`, {
+					folder_name: updateFolderRequest.folder_name,
+					nested_folders: updateFolderRequest.nested_folders,
+					files: updateFolderRequest.files
+				})
 				.then((response) => {
 					const data: FolderEntity = new FolderEntity(
 						response.data.data.id,
 						response.data.data.folder_name,
 						response.data.data.nested_folders,
-						response.data.data.items,
+						response.data.data.files,
 						response.data.data.shared_user,
 						response.data.data.created_at,
 						response.data.data.updated_at
-					)
+					);
 					resolve(data);
 				})
 				.catch((err) => {
@@ -78,18 +81,11 @@ class FolderAxios {
 	deleteFolder(folderId) {
 		return new Promise((resolve, reject) => {
 			axios
-				.delete(`${this.folderUrl}/${folderId}`)
+				.delete(`${this.folderUrl}/?folderId=${folderId}`)
 				.then((response) => {
-					const data: FolderEntity = new FolderEntity(
-						response.data.data.id,
-						response.data.data.folder_name,
-						response.data.data.nested_folders,
-						response.data.data.items,
-						response.data.data.shared_user,
-						response.data.data.created_at,
-						response.data.data.updated_at
-					)
-					resolve(data);
+					resolve({
+						data: response.data.data,
+					});
 				})
 				.catch((err) => {
 					reject(err);

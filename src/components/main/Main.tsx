@@ -1,16 +1,15 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PlainContext from '../contextMenu/PlainContext';
-import FolderList from '../mapping/folderMapping/FolderList.jsx';
-import FileList from '../mapping/fileMapping/FileList.jsx';
+import FolderList from '@/components/mapping/folderMapping/FolderList.jsx';
+import FileList from '@/components/mapping/fileMapping/FileList.jsx';
 import ArrowCircleLeft from '../../assets/icon/arrow-circle-left.jsx';
 import MainViewModel from './MainViewModel';
-import { store } from '../../redux/store';
+import { store } from '@/redux/store';
 
 const viewModel = new MainViewModel(store);
 
 export default function Header() {
-	const dispatch = useDispatch();
 	const position = useSelector((state: any) => state.context.position);
 	const folderNameInputClass = useSelector(
 		(state: any) => state.current.folderInputCondition
